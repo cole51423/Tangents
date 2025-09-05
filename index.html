@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivative Practice Sheet</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                },
+                chtml: {
+                    scale: 1.2,
+                    displayAlign: 'center',
+                    displayIndent: '0em',
+                    fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/tex-woff',
+                },
+                options: {
+                    renderActions: {
+                        addMenu: []
+                    }
+                }
+            };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px 24px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .question {
+            margin-bottom: 32px;
+            padding: 18px 16px;
+            border-radius: 6px;
+            background: #f0f4fa;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+        .question-number {
+            font-weight: bold;
+            color: #2a4d8f;
+        }
+        .answer {
+            margin-top: 12px;
+            background: #e6f7e6;
+            padding: 10px 14px;
+            border-radius: 4px;
+            color: #1a5d1a;
+            font-size: 1.08em;
+        }
+        /* MathJax LaTeX styling */
+        .mjx-chtml {
+            font-family: 'Latin Modern Math', 'STIX Two Math', 'TeX', 'Times New Roman', Times, serif !important;
+            font-size: 1.25em !important;
+            line-height: 1.5;
+        }
+        .mjx-chtml[display="true"] {
+            display: block;
+            margin: 1em auto;
+            text-align: center;
+        }
+        .latex-answer {
+            text-align: center;
+            margin-top: 1em;
+        }
+        .latex-display {
+            display: block;
+            font-size: 1.35em;
+            font-family: 'Latin Modern Math', 'STIX Two Math', 'TeX', 'Times New Roman', Times, serif !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Derivative Practice Sheet</h1>
+        <div id="questions"></div>
+    </div>
+    <script>
+        // List of questions and answers
+        const questions = [
+            {
+                q: "Find the derivative of \\( f(x) = 3x^4 - 2x^2 + 7 \\)",
+                a: "f'(x) = 12x^3 - 4x"
+            },
+            {
+                q: "Find the derivative of \\( g(x) = \\frac{2x+1}{x^2+1} \\)",
+                a: "g'(x) = \\frac{(2)(x^2+1) - (2x+1)(2x)}{(x^2+1)^2} = \\frac{2x^2+2 - 4x^2 - 4x}{(x^2+1)^2} = \\frac{-2x^2 - 4x + 2}{(x^2+1)^2}"
+            },
+            {
+                q: "Find the derivative of \\( h(x) = \\sin(x^2) \\)",
+                a: "h'(x) = 2x \\cos(x^2)"
+            },
+            {
+                q: "Find the derivative of \\( k(x) = e^{3x} \\cos(x) \\)",
+                a: "k'(x) = 3e^{3x}\\cos(x) - e^{3x}\\sin(x)"
+            },
+            {
+                q: "Find the derivative of \\( m(x) = \\arctan(x^2) \\)",
+                a: "m'(x) = \\frac{2x}{1 + x^4}"
+            },
+            {
+                q: "Find the derivative of \\( p(x) = \\ln(x^2 + 1) \\)",
+                a: "p'(x) = \\frac{2x}{x^2 + 1}"
+            },
+            {
+                q: "Find the derivative of \\( q(x) = x^2 \\sin(x) \\)",
+                a: "q'(x) = 2x\\sin(x) + x^2\\cos(x)"
+            },
+            {
+                q: "Find the derivative of \\( r(x) = \\frac{1}{x^2+4} \\) at x = 1",
+                a: "r'(x) = -\\frac{2x}{(x^2+4)^2}, \\quad r'(1) = -\\frac{2}{25}"
+            },
+            {
+                q: "Find the derivative of \\( s(x) = \\arcsin(2x) \\) at x = 0",
+                a: "s'(x) = \\frac{2}{\\sqrt{1-4x^2}}, \\quad s'(0) = 2"
+            },
+            {
+                q: "Find the derivative of \\( t(x) = x^3 e^{x} \\tan(x) \\)",
+                a: "t'(x) = 3x^2 e^x \\tan(x) + x^3 e^x \\tan(x) + x^3 e^x \\sec^2(x)"
+            }
+        ];
+
+        const questionsDiv = document.getElementById('questions');
+        questions.forEach((item, idx) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question';
+            qDiv.innerHTML = `
+                <div class="question-number">Question ${idx + 1}</div>
+                <div class="question-text">${item.q}</div>
+                <div class="answer latex-answer">\\[${item.a}\\]</div>
+            `;
+            questionsDiv.appendChild(qDiv);
+        });
+        // Re-render MathJax after DOM update
+        if (window.MathJax) {
+            MathJax.typesetPromise();
+        }
+    </script>
+    <style>
+        .latex-answer {
+            text-align: center;
+            margin-top: 1em;
+        }
+        .latex-display {
+            display: block;
+            font-size: 1.35em;
+            font-family: 'Latin Modern Math', 'STIX Two Math', 'TeX', 'Times New Roman', Times, serif !important;
+        }
+    </style>
+</body>
+</html>
